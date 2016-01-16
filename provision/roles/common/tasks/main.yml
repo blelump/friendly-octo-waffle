@@ -1,0 +1,19 @@
+---
+- name: Install packages
+  sudo: yes
+  apt: pkg={{item}} state=latest update_cache=yes
+  with_items:
+    - htop
+    - vim
+    - tree
+    - git
+
+# Fetch .env for deployer user
+- name: Install fetch .env script
+  template: src=install_dot_env.sh.j2 dest=/tmp/install_dot_env.sh mode=0755
+
+- name: Fetch .env
+  command: /tmp/install_dot_env.sh chdir=~/
+
+- name: Add .alias to .bash_profile
+  lineinfile: dest=~/.bash_profile state=present line="source ~/.alias" create=yes

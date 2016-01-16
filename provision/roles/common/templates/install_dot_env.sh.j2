@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+if [[ $(git rev-parse --is-inside-work-tree) != "true" ]]; then
+  git init
+  git remote add origin {{ github.dotenv_repo_address }}
+fi
+git fetch --all
+git reset --hard origin/master

@@ -1,0 +1,6 @@
+---
+# Install a role from GitHub
+- name: docker.ubuntu
+  src: https://github.com/angstwad/docker.ubuntu.git
+  path : roles/external
+  version: v1.0
